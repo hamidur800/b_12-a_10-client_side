@@ -27,7 +27,7 @@ const LogIn = () => {
     googleLogin()
       .then((result) => {
         console.log("Google user:", result.user);
-        navigate("/"); // ✅ THIS IS FIXED
+        navigate("/");
       })
       .catch((error) => console.error(error.message));
   };
