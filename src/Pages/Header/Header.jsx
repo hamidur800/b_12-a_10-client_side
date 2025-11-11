@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router";
 import ThemeToggle from "../../ThemeToggle";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const Header = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const activeColor =
+    "bg-gradient-to-r from-rose-400 via-fuchsia-400 to-sky-400 bg-clip-text text-transparent text-lg";
+  const hoverColor =
+    "hover:bg-gradient-to-r hover:from-violet-500 hover:via-blue-500 hover:to-cyan-500 hover:bg-clip-text hover:text-transparent";
+
   return (
     <>
       <div className="w-11/12 mx-auto">
@@ -32,37 +39,55 @@ const Header = () => {
               </div>
               <ul
                 tabIndex="-1"
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-100 mt-3 w-52 p-2 shadow"
               >
                 <li>
-                  <NavLink className="transition" to="Home">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? activeColor : ` text-lg  ${hoverColor}`
+                    }
+                    to="Home"
+                  >
                     Home
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className="transition" to="AllProperties">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? activeColor : ` text-lg ${hoverColor}`
+                    }
+                    to="AllProperties"
+                  >
                     All Properties
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className="transition" to="AddProperties">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? activeColor : ` text-lg ${hoverColor}`
+                    }
+                    to="AddProperties"
+                  >
                     Add Properties
                   </NavLink>
                 </li>
                 <li>
                   <NavLink
-                    to="MyProperties"
                     className={({ isActive }) =>
-                      `relative transition duration-300 pb-1 ${
-                        isActive ? "active-link" : "hover-link"
-                      }`
+                      isActive ? activeColor : ` text-lg ${hoverColor}`
                     }
+                    to="MyProperties"
                   >
                     My Properties
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className="transition" to="MyRatings">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? activeColor : ` text-lg ${hoverColor}`
+                    }
+                    to="MyRatings"
+                  >
                     My Ratings
                   </NavLink>
                 </li>
@@ -78,37 +103,94 @@ const Header = () => {
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">
               <li>
-                <NavLink className="transition" to="Home">
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? activeColor : ` text-lg ${hoverColor}`
+                  }
+                  to="Home"
+                >
                   Home
                 </NavLink>
               </li>
               <li>
-                <NavLink className="transition" to="AllProperties">
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? activeColor : ` text-lg ${hoverColor}`
+                  }
+                  to="AllProperties"
+                >
                   All Properties
                 </NavLink>
               </li>
               <li>
-                <NavLink className="transition" to="AddProperties">
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? activeColor : ` text-lg ${hoverColor}`
+                  }
+                  to="AddProperties"
+                >
                   Add Properties
                 </NavLink>
               </li>
               <li>
-                <NavLink className="transition" to="MyProperties">
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? activeColor : ` text-lg ${hoverColor}`
+                  }
+                  to="MyProperties"
+                >
                   My Properties
                 </NavLink>
               </li>
               <li>
-                <NavLink className="transition" to="MyRatings">
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? activeColor : ` text-lg ${hoverColor}`
+                  }
+                  to="MyRatings"
+                >
                   My Ratings
                 </NavLink>
               </li>
             </ul>
           </div>
           <div className="navbar-end">
-            <div className="">
+            <div className="mr-2">
               <ThemeToggle />
             </div>
-            <a className="btn ml-2">Button</a>
+            {user ? (
+              <div className="dropdown dropdown-end">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar"
+                >
+                  <div className="w-10 rounded-full border border-blue-600">
+                    <img src={user?.photoURL} />
+                  </div>
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[999] mt-3 w-52 p-2 shadow"
+                >
+                  <li className="px-3 py-2 font-semibold">
+                    {user?.displayName}
+                  </li>
+                  <li>
+                    <button
+                      onClick={logOut}
+                      className="flex justify-center items-center font-medium text-red-500"
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <Link to="/Login" className="btn btn-sm btn-primary ml-4">
+                Login
+              </Link>
+            )}
           </div>
         </div>
       </div>

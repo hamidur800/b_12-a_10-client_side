@@ -1,37 +1,28 @@
-import React, { useContext, useRef, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router";
+import React, { useContext, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { Link, useNavigate } from "react-router";
+import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
-import { AuthContext } from "../../provider/AuthProvider";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
-function Login() {
-  const { signIn, googleLogin } = useContext(AuthContext);
-  const [email, setEmail] = useState("");
+function Registation() {
+  const { createUser, updateUserProfile, googleLogin } =
+    useContext(AuthContext);
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
-  const location = useLocation();
-  const emailRef = useRef();
 
-  // const handleForgot = () => {
-  //   const email = emailRef.current.value;
-  //   sendPasswordResetEmail(auth, email)
-  //     .then(() => {
-  //       Swal.fire(
-  //         "Check your email!",
-  //         "Password reset link sent successfully.",
-  //         "success"
-  //       );
-  //     })
-  //     .catch((error) => {
-  //       Swal.fire("Error!", error.message, "error");
-  //     });
-  // };
-
-  const handleSubmit = (e) => {
+  // Handle Register Form Submit
+  const handleRegister = (e) => {
     e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const photoURL = form.photoURL.value;
+
+    setError("");
 
     if (password.length < 6) {
       Swal.fire(
@@ -56,50 +47,84 @@ function Login() {
       return;
     }
 
-    signIn(email, password)
-      .then(() => {
-        Swal.fire("Success!", "Logged in successfully", "success");
-        navigate(location.state || "/");
-      })
-      .catch(() => {
-        Swal.fire("Error!", "Incorrect Password", "error");
-      });
+    createUser(email, password).then(() => {
+      updateUserProfile(name, photoURL)
+        .then(() => {
+          Swal.fire({
+            icon: "success",
+            title: "Registration Successful!",
+            text: "Welcome to Toy-Topia 🎉",
+            showConfirmButton: false,
+            timer: 1800,
+          });
+          navigate("/");
+        })
+        .catch((err) => setError(err.message));
+    });
   };
 
+  // Handle Google Login
   const handleGoogleLogin = () => {
     googleLogin()
       .then(() => {
-        Swal.fire("Success!", "Logged in with Google", "success");
-        navigate(location.state || "/");
+        Swal.fire({
+          icon: "success",
+          title: "Login Successful!",
+          text: "Welcome back 🎉",
+          showConfirmButton: false,
+          timer: 1800,
+        });
+        navigate("/");
       })
-      .catch((err) => {
-        Swal.fire("Error!", err.message, "error");
-      });
+      .catch((err) => setError(err.message));
   };
 
   return (
     <>
+      {" "}
       <Helmet>
-        <title>Login | HOME-NEST</title>
-      </Helmet>
+        {" "}
+        <title>Registration | HOME-NEST</title>{" "}
+      </Helmet>{" "}
       <div className="min-h-screen flex items-center justify-center px-4">
+        {" "}
         <div className="bg-white shadow-2xl rounded-2xl w-full max-w-md lg:max-w-xl flex flex-col lg:flex-row overflow-hidden">
+          {" "}
           <div className="flex-1 p-8 sm:p-10">
+            {" "}
             <h2 className="text-3xl font-bold text-center text-gray-700 mb-6">
-              Log In HOME-NEST !
+              Register to HOME-NEST !{" "}
             </h2>
+            <form onSubmit={handleRegister} className="space-y-4">
+              <div>
+                <label className="block text-gray-600 mb-1">Name</label>
+                <input
+                  name="name"
+                  type="text"
+                  placeholder="Enter Your Name"
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 "
+                  required
+                />
+              </div>
 
-            <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label className="block text-gray-600 mb-1">Email</label>
                 <input
+                  name="email"
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="Enter Your Email"
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2"
-                  value={email}
-                  ref={emailRef}
-                  onChange={(e) => setEmail(e.target.value)}
                   required
+                />
+              </div>
+
+              <div>
+                <label className="block text-gray-600 mb-1">photoURL</label>
+                <input
+                  name="photoURL"
+                  type="text"
+                  placeholder="Enter Your photoURL"
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2"
                 />
               </div>
 
@@ -107,6 +132,7 @@ function Login() {
                 <label className="block text-gray-600 mb-1">Password</label>
                 <input
                   type={showPassword ? "text" : "password"}
+                  name="password"
                   placeholder="Enter your password"
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2"
                   value={password}
@@ -114,7 +140,7 @@ function Login() {
                   required
                 />
                 <div
-                  className="absolute  right-3 top-12 -translate-y-1/2 cursor-pointer text-gray-600"
+                  className="absolute right-3 top-12 -translate-y-1/2 cursor-pointer text-gray-600"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
@@ -125,37 +151,24 @@ function Login() {
                 </div>
               </div>
 
-              <div className="flex justify-end">
-                <div>
-                  <Link to="/forget-password" state={{ email }}>
-                    <button className="link link-hover text-blue-500">
-                      Forgot password?
-                    </button>
-                  </Link>
-                </div>
-              </div>
-
               <button
                 type="submit"
                 className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors mt-4"
               >
-                Login
+                Registration
               </button>
             </form>
-
             <div className="divider">OR</div>
-
             <div
-              className="flex justify-center items-center h-8"
               onClick={handleGoogleLogin}
+              className="flex justify-center items-center h-8 "
             >
               <FcGoogle className="cursor-pointer transform transition-transform duration-300 ease-in-out hover:scale-125 h-10 w-10" />
             </div>
-
             <p className="text-center text-gray-500 text-sm mt-6">
-              Don't have an account?{" "}
-              <Link to="/Registation" className="text-blue-500 hover:underline">
-                Sign Up
+              Already have an account?{" "}
+              <Link to="/Login" className="text-blue-500 hover:underline">
+                Log In
               </Link>
             </p>
           </div>
@@ -165,4 +178,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Registation;

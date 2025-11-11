@@ -1,17 +1,16 @@
 import React from "react";
 import Header from "../Pages/Header/Header";
-import { Outlet } from "react-router";
 import Footer from "../Pages/Footer/Footer";
-import "./Root.css";
+import { Outlet } from "react-router";
 
-const Root = () => {
+function Root() {
   return (
-    <>
-      <Header />
-      <Outlet />
-      <Footer />
-    </>
+    <div>
+      <Header></Header>
+      <Outlet></Outlet>
+      <Footer></Footer>
+    </div>
   );
-};
+}
 
 export default Root;

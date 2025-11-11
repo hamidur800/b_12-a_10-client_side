@@ -1,11 +1,4 @@
-@import "tailwindcss";
-@plugin "daisyui";
-
-.container {
-  max-width: 1240px;
-  margin: 0 auto;
-}
-
+/* From Uiverse.io by andrew-demchenk0 */
 .switch {
   font-size: 17px;
   position: relative;

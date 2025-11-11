@@ -1,2 +1,24 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+.nevber a.active {
+  border-bottom: 2px solid #6453f7;
+}
+
+/* Title Color
+#000000
+
+Subtitle Color
+#FFFFFF
+
+Subtitle Background Color
+#6453F7
+
+button background Color
+#191919
+
+Button text Color
+#FFFFFF
+
+button hover background Color
+#6453F7 */
