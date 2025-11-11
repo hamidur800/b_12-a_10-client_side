@@ -4,13 +4,13 @@ import Home from "../Components/Home/Home";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Login from "../Pages/Login/Login";
 import Registation from "../Pages/Registation/Registation";
-import ToyDetails from "../Components/ToyDetails/ToyDetails";
 import AllProperties from "../Components/All Properties/AllProperties";
 import MyProperties from "../Components/MyProperties/MyProperties";
 import MyRatings from "../Components/MyRatings/MyRatings";
 import PrivateRoute from "../provider/PrivateRoute";
 import ForgetPassword from "../Pages/Login/forgetpassword";
 import AddProperties from "../Components/Add Properties/AddProperties";
+import PropertyDetails from "../Components/Property Details/PropertyDetails";
 
 export const router = createBrowserRouter([
   {
@@ -58,11 +58,11 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "ToyDetails/:id",
+        path: "PropertyDetails/:id",
         loader: () => fetch("/alltoys.json"),
         element: (
           <PrivateRoute>
-            <ToyDetails />
+            <PropertyDetails />
           </PrivateRoute>
         ),
       },

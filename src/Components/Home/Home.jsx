@@ -10,6 +10,7 @@ const Home = () => {
   const [featured, setFeatured] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [properties, setProperties] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:3000/properties")
@@ -17,6 +18,10 @@ const Home = () => {
       .then((data) => {
         setFeatured(data);
         setLoading(false);
+        const sorted = data.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+        setProperties(sorted.slice(0, 6));
       })
       .catch((err) => {
         console.error(err);
@@ -33,27 +38,27 @@ const Home = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-pink-50 to-white">
+    <div className="min-h-screen ">
       {/*    Slider Section */}
       <Swiper
         modules={[Pagination, Autoplay]}
         pagination={{ clickable: true }}
         autoplay={{ delay: 3500 }}
         loop
-        className="h-[400px] md:h-[550px] mb-10"
+        className="h-[400px] md:h-[550px] w-10/12 mb-10"
       >
         {[
           {
             title: "Find Your Dream Home",
-            img: "https://i.ibb.co/W6V0r3L/home-banner1.jpg",
+            img: "https://i.ibb.co/84tCGKM2/fainal2.jpg",
           },
           {
             title: "Luxury Villas & Apartments",
-            img: "https://i.ibb.co/3zZbZcY/home-banner2.jpg",
+            img: "https://i.ibb.co/qLqBYKG9/fainal3.jpg",
           },
           {
             title: "Smart Living for Smart People",
-            img: "https://i.ibb.co/GVXtLfK/home-banner3.jpg",
+            img: "https://i.ibb.co/6c1b7J0h/download-4.jpg",
           },
         ].map((slide, idx) => (
           <SwiperSlide key={idx}>
@@ -72,7 +77,7 @@ const Home = () => {
 
       {/*     Featured Properties */}
       <section className="w-11/12 mx-auto mb-20">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-600 mb-10">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
           Featured Properties
         </h2>
 
@@ -103,7 +108,7 @@ const Home = () => {
                   </span>
                 </div>
                 <Link
-                  to={`/propertydetails/${property._id}`}
+                  to={`/PropertyDetails/${property._id}`}
                   className="block w-full text-center py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition"
                 >
                   View Details
@@ -114,87 +119,139 @@ const Home = () => {
         </div>
       </section>
 
-      {/*     Why Choose Us */}
-      <section className="bg-indigo-100 py-16">
-        <div className="w-11/12 mx-auto text-center space-y-5">
-          <h2 className="text-3xl md:text-4xl font-bold text-indigo-700">
-            Why Choose HomeNest?
+      <div className="min-h-screen">
+        {/* Featured Properties */}
+        <section className="max-w-7xl mx-auto py-12 px-4">
+          <h2 className="text-3xl font-bold text-center mb-8">
+            Featured Properties
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            At HomeNest, we believe finding your dream home should be simple,
-            secure, and satisfying. That’s why we offer transparent listings,
-            verified owners, and top-rated agents for a smooth experience.
-          </p>
-
-          <div className="grid md:grid-cols-3 gap-6 mt-10">
-            {[
-              {
-                title: "Trusted Listings",
-                desc: "All properties are verified by our team.",
-              },
-              {
-                title: "Affordable Pricing",
-                desc: "Compare thousands of listings easily.",
-              },
-              { title: "24/7 Support", desc: "We’re always here to help you." },
-            ].map((item, idx) => (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {properties.map((prop) => (
               <div
-                key={idx}
-                className="bg-white p-6 rounded-xl shadow hover:shadow-xl transition"
+                key={prop._id}
+                className="bg-white rounded-xl flex flex-col shadow-md hover:shadow-xl transition-all duration-200"
               >
-                <FaStar className="text-yellow-500 text-3xl mx-auto mb-3" />
-                <h3 className="font-semibold text-lg text-gray-800">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-gray-600">{item.desc}</p>
+                <img
+                  src={prop.image || "/placeholder.jpg"}
+                  alt={prop.title}
+                  className="h-48 w-full object-cover rounded-t-xl"
+                />
+                <div className="flex flex-col justify-between flex-grow p-4">
+                  <div>
+                    <h3 className="text-xl font-semibold mb-1">{prop.title}</h3>
+                    <p className="text-gray-500 text-sm mb-2">
+                      {prop.location}
+                    </p>
+                  </div>
+                  <div className="flex justify-between items-center mt-auto">
+                    <p className="text-lg font-bold text-rose-500">
+                      ${prop.price}
+                    </p>
+                    <Link variant="outline" size="sm">
+                      View Details
+                    </Link>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/*     Extra Section 1 */}
-      <section className="py-20 w-11/12 mx-auto">
-        <div className="grid md:grid-cols-2 gap-10 items-center">
-          <img
-            src="https://i.ibb.co/N7dSpwr/real-estate-agent.jpg"
-            alt="agent"
-            className="rounded-2xl shadow-lg"
-          />
-          <div>
-            <h2 className="text-3xl font-bold text-indigo-600 mb-4">
-              Expert Agents at Your Service
-            </h2>
-            <p className="text-gray-600 mb-4">
-              Our certified agents help you every step of the way—from finding
-              properties to closing the deal.
-            </p>
-            <Link
-              to="/AllProperties"
-              className="inline-block bg-indigo-500 text-white px-6 py-3 rounded-lg hover:bg-indigo-600"
-            >
-              Browse Properties
-            </Link>
+        {/* Why Choose Us */}
+        <section className=" py-16">
+          <div className="max-w-6xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-10">Why Choose Us</h2>
+            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
+              {[
+                {
+                  title: "Verified Listings",
+                  desc: "All properties are carefully verified before publishing.",
+                },
+                {
+                  title: "Trusted Agents",
+                  desc: "Work with professional and experienced real estate agents.",
+                },
+                {
+                  title: "Best Locations",
+                  desc: "We list only top-rated and well-connected neighborhoods.",
+                },
+                {
+                  title: "Secure Transactions",
+                  desc: "Safe payments and transparent documentation process.",
+                },
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  className="p-6 bg-gray-50 rounded-2xl shadow-sm hover:shadow-md transition-all"
+                >
+                  <h3 className="text-black text-xl font-semibold mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600">{item.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/*     Extra Section 2 */}
-      <section className="bg-indigo-50 py-20 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-indigo-700 mb-6">
-          Join 10,000+ Happy Home Owners
-        </h2>
-        <p className="max-w-xl mx-auto text-gray-600 mb-6">
-          Start your journey today with HomeNest and make your property dreams a
-          reality!
-        </p>
-        <Link
-          to="/Signup"
-          className="inline-block bg-pink-500 text-white px-8 py-3 rounded-lg hover:bg-pink-600 transition"
-        >
-          Get Started
-        </Link>
-      </section>
+        <section className=" py-16">
+          <div className="max-w-5xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-10">Happy Clients</h2>
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {[
+                {
+                  name: "Rahim Khan",
+                  quote:
+                    "Found my dream flat within a week. Highly recommended!",
+                },
+                {
+                  name: "Sara Ahmed",
+                  quote: "Agents were professional and listings were genuine.",
+                },
+                {
+                  name: "Nayeem Hossain",
+                  quote: "Smooth process from start to finish.",
+                },
+              ].map((t) => (
+                <div
+                  key={t.name}
+                  className="p-6 bg-white text-center shadow-lg rounded-2xl"
+                >
+                  <p className="italic text-gray-700 mb-3">“{t.quote}”</p>
+                  <h4 className="font-semibold text-rose-500">{t.name}</h4>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/*Latest Blogs */}
+        <section className="py-16">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-10">
+              Real Estate Tips
+            </h2>
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {[1, 2, 3].map((b) => (
+                <div
+                  key={b}
+                  className="p-6 border rounded-2xl hover:shadow-lg transition-all"
+                >
+                  <h3 className="text-xl font-semibold mb-2">
+                    How to Find the Right Property #{b}
+                  </h3>
+                  <p className="text-gray-600 mb-3">
+                    Quick guide to evaluate property listings effectively.
+                  </p>
+                  <Link size="sm" variant="outline">
+                    Read More
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
   );
 };
