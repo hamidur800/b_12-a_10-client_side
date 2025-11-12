@@ -8,28 +8,27 @@ export default function UpdateProperty() {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
-  const [property, setProperty] = useState(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
   const [formData, setFormData] = useState({
-    name: "",
+    propertyName: "",
     price: "",
     location: "",
     category: "",
     description: "",
   });
 
-  // Fetch single property by id
+  //  Fetch single property by ID
   useEffect(() => {
     const fetchProperty = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/properties/${id}`);
+        const res = await fetch(`http://localhost:3000/properties/${id}`);
         if (!res.ok) throw new Error("Failed to fetch property");
         const data = await res.json();
-        setProperty(data);
+
         setFormData({
-          name: data.name || "",
+          propertyName: data.propertyName || "",
           price: data.price || "",
           location: data.location || "",
           category: data.category || "",
@@ -37,6 +36,7 @@ export default function UpdateProperty() {
         });
       } catch (err) {
         console.error(err);
+        Swal.fire("Error", "Failed to load property data", "error");
       } finally {
         setLoading(false);
       }
@@ -45,10 +45,16 @@ export default function UpdateProperty() {
     fetchProperty();
   }, [id]);
 
+  // Handle change
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
+  // Handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
@@ -132,8 +138,8 @@ export default function UpdateProperty() {
           </label>
           <input
             type="text"
-            name="name"
-            value={formData.name}
+            name="propertyName"
+            value={formData.propertyName}
             onChange={handleChange}
             required
             className="w-full border rounded px-3 py-2"

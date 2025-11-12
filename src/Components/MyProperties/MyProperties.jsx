@@ -90,55 +90,67 @@ export default function MyProperties() {
       {properties.length === 0 ? (
         <p className="text-center text-gray-500">No properties found.</p>
       ) : (
-        <div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {properties.map((prop) => (
             <div
               key={prop._id}
-              className="flex flex-col shadow-md hover:shadow-lg transition-all duration-200"
+              className="flex flex-col rounded-xl shadow-md hover:shadow-xl transition-all bg-gradient-to-r from-fuchsia-50 to-sky-50  duration-200"
             >
               <img
                 src={prop.image || "/placeholder.jpg"}
-                alt={prop.title}
-                className="h-48 w-full object-cover rounded-t-2xl"
+                alt={prop.propertyName}
+                className="h-48 w-full object-cover rounded-t-xl"
               />
-              <div className="p-4 flex flex-col justify-between flex-grow">
-                <div>
-                  <h3 className="text-xl font-semibold mb-1">{prop.title}</h3>
-                  <p className="text-gray-500 text-sm mb-1">{prop.location}</p>
-                  <p className="text-sm text-gray-400 mb-2">{prop.category}</p>
-                  <p className="text-lg font-semibold text-rose-500 mb-2">
+              <div className="flex flex-col justify-between flex-grow p-4">
+                <div className="flex justify-between items-center">
+                  <div className="">
+                    <h3 className="text-xl font-semibold mb-1">
+                      {prop.propertyName}
+                    </h3>
+                    <p className="text-gray-500 text-sm mb-2">
+                      {prop.location}
+                    </p>
+                  </div>
+                  <div className="">
+                    <p className="italic text-gray-700 text-sm">
+                      Category :{prop.category || "N/A"}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex justify-between items-center mt-auto">
+                  <p className="text-lg font-bold text-rose-500">
                     ${prop.price}
                   </p>
-                  <p className="text-xs text-gray-400">
-                    {new Date(prop.createdAt).toLocaleDateString()}
-                  </p>
-                </div>
 
-                {/* Buttons */}
-                <div className="mt-4 flex justify-between gap-2">
-                  <Link
-                    variant="outline"
-                    size="sm"
-                    onClick={() => navigate(`/property/${prop._id}`)}
-                  >
-                    View
-                  </Link>
-                  <Link
-                    variant="outline"
-                    size="sm"
-                    onClick={() => navigate(`/update/${prop._id}`)}
-                  >
-                    Update
-                  </Link>
-                  <Link
-                    variant="default"
-                    size="sm"
-                    className="bg-rose-500 hover:bg-rose-600 text-white"
-                    onClick={() => handleDelete(prop._id)}
-                  >
-                    Delete
-                  </Link>
+                  <Link to={`/property/${prop._id}`}>View Details</Link>
                 </div>
+                <p className=" italic text-gray-700 text-sm">
+                  Posted by : {prop.userName || "Unknown"}
+                </p>
+              </div>
+              <div className="p-2 flex justify-between gap-2">
+                <Link
+                  variant="outline"
+                  size="sm"
+                  onClick={() => navigate(`/property/${prop._id}`)}
+                >
+                  View
+                </Link>
+                <Link
+                  variant="outline"
+                  size="sm"
+                  onClick={() => navigate(`/update/${prop._id}`)}
+                >
+                  Update
+                </Link>
+                <Link
+                  variant="default"
+                  size="sm"
+                  className="bg-rose-500 hover:bg-rose-600 text-white"
+                  onClick={() => handleDelete(prop._id)}
+                >
+                  Delete
+                </Link>
               </div>
             </div>
           ))}

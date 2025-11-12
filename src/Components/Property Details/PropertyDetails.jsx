@@ -8,8 +8,6 @@ export default function PropertyDetails() {
   const { id } = useParams();
   const { user } = useContext(AuthContext);
 
-  console.log("User in PropertyDetails:", user, id);
-
   const [property, setProperty] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
