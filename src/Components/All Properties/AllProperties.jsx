@@ -3,23 +3,25 @@ import { Link } from "react-router";
 
 export default function AllProperties() {
   const [properties, setProperties] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [sort, setSort] = useState("");
   const [search, setSearch] = useState("");
+  const [sort, setSort] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  // 🔹 Fetch all properties with sort & search
   const fetchProperties = async () => {
     setLoading(true);
     try {
       const url = new URL("http://localhost:3000/properties");
-      if (sort) url.searchParams.append("sort", sort);
       if (search) url.searchParams.append("search", search);
+      if (sort) url.searchParams.append("sort", sort);
 
       const res = await fetch(url);
       const data = await res.json();
-      setProperties(data);
+
+      if (Array.isArray(data)) setProperties(data);
+      else setProperties([]);
     } catch (err) {
       console.error("Error fetching properties:", err);
+      setProperties([]);
     } finally {
       setLoading(false);
     }
@@ -27,7 +29,7 @@ export default function AllProperties() {
 
   useEffect(() => {
     fetchProperties();
-  }, [sort, search]);
+  }, [search, sort]);
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4">
@@ -52,10 +54,10 @@ export default function AllProperties() {
             className="px-4 py-2 border rounded-xl focus:ring-2 focus:ring-rose-400 outline-none"
           >
             <option value="">Sort by</option>
-            <option value="price_asc">Price ↑</option>
-            <option value="price_desc">Price ↓</option>
-            <option value="date_asc">Date ↑</option>
-            <option value="date_desc">Date ↓</option>
+            <option value="price_asc">Price Up</option>
+            <option value="price_desc">Price Down</option>
+            <option value="date_asc">Date Up</option>
+            <option value="date_desc">Date Down</option>
           </select>
         </div>
       </div>
@@ -79,7 +81,7 @@ export default function AllProperties() {
               >
                 <img
                   src={prop.image || "/placeholder.jpg"}
-                  alt={prop.title}
+                  alt={prop.propertyName}
                   className="h-48 w-full object-cover rounded-t-xl"
                 />
                 <div className="flex flex-col justify-between flex-grow p-4">
@@ -98,15 +100,7 @@ export default function AllProperties() {
                     <p className="text-lg font-bold text-rose-500">
                       ${prop.price}
                     </p>
-                    <Link
-                      variant="outline"
-                      size="sm"
-                      onClick={() =>
-                        (window.location.href = `/PropertyDetails/${prop._id}`)
-                      }
-                    >
-                      View Details
-                    </Link>
+                    <Link to={`/property/${prop._id}`}>View Details</Link>
                   </div>
                   <p className="mt-2 text-xs text-gray-400">
                     Posted by: {prop.userName || "Unknown"}

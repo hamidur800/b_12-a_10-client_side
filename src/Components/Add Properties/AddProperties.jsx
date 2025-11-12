@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../provider/AuthProvider";
+import { useNavigate } from "react-router";
 
 const AddProperties = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleAddProperty = (e) => {
     e.preventDefault();
@@ -35,6 +37,7 @@ const AddProperties = () => {
           confirmButtonColor: "#6366f1",
         });
         form.reset();
+        navigate("/AllProperties");
       });
   };
 

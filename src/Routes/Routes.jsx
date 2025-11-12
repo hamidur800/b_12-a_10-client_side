@@ -11,6 +11,7 @@ import PrivateRoute from "../provider/PrivateRoute";
 import ForgetPassword from "../Pages/Login/forgetpassword";
 import AddProperties from "../Components/Add Properties/AddProperties";
 import PropertyDetails from "../Components/Property Details/PropertyDetails";
+import Update from "../Components/Update/Update";
 
 export const router = createBrowserRouter([
   {
@@ -30,7 +31,6 @@ export const router = createBrowserRouter([
       },
       {
         path: "AllProperties",
-        loader: () => fetch("/alltoys.json"),
         element: <AllProperties></AllProperties>,
       },
       {
@@ -58,11 +58,18 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "PropertyDetails/:id",
-        loader: () => fetch("/alltoys.json"),
+        path: "property/:id",
         element: (
           <PrivateRoute>
             <PropertyDetails />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "update/:id",
+        element: (
+          <PrivateRoute>
+            <Update></Update>
           </PrivateRoute>
         ),
       },

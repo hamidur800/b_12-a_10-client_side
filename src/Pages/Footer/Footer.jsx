@@ -57,8 +57,8 @@ const Footer = () => {
 
         {/* Social Media */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-gray-600">
-            © {new Date().getFullYear()} ToyTopia — All rights reserved.
+          <p className="text-center mt-8 text-sm text-gray-500">
+            © {new Date().getFullYear()} HomeNest. All rights reserved.
           </p>
           <div className="flex gap-4 text-2xl text-gray-700">
             <Link
