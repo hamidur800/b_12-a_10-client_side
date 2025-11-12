@@ -176,6 +176,7 @@ const Header = () => {
                   <li className="px-3 py-2 font-semibold">
                     {user?.displayName}
                   </li>
+                  <li className="px-3 py-2 ">{user?.email}</li>
                   <li>
                     <button
                       onClick={logOut}
