@@ -56,17 +56,17 @@ export default function MyRatings() {
       {ratings.map((rating) => (
         <div
           key={rating._id}
-          className="border rounded-xl shadow p-4 flex flex-col"
+          className="shadow p-4 flex flex-col  hover:shadow-xl hover:shadow-gradient transition-all border  duration-200 rounded-xl"
         >
           <img
             src={rating.imageR || rating.image}
             alt={rating.propertyName}
             className="w-full h-40 object-cover rounded-md mb-3"
           />
-          <p className="text-gray-600 mb-1">Reviewer: {rating.userName}</p>
+          <p className="text-gray-400 mb-1">Reviewer: {rating.userName}</p>
           <p className="text-xl font-semibold mb-1">{rating.propertyName}</p>
-          <p className="text-yellow-500 mb-1">⭐ {rating.stars} / 5</p>
-          <p className="text-gray-800 mb-2">Dec {rating.text}</p>
+          <p className="text-yellow-500 mb-1">Stars {rating.stars} / 5</p>
+          <p className="text-gray-400 mb-2">Dec : {rating.text}</p>
           <p className="text-gray-400 text-sm">
             {new Date(rating.date).toLocaleDateString()}
           </p>

@@ -7,11 +7,6 @@ import { AuthContext } from "../../provider/AuthProvider";
 export default function MyProperties() {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-
-  // Simulated Auth
-  // const user = JSON.parse(localStorage.getItem("user"));
-  // const isLoggedIn = !!user;
-
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
 
