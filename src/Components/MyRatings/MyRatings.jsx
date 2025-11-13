@@ -59,14 +59,14 @@ export default function MyRatings() {
           className="border rounded-xl shadow p-4 flex flex-col"
         >
           <img
-            src={rating.image}
+            src={rating.imageR || rating.image}
             alt={rating.propertyName}
             className="w-full h-40 object-cover rounded-md mb-3"
           />
           <p className="text-gray-600 mb-1">Reviewer: {rating.userName}</p>
           <p className="text-xl font-semibold mb-1">{rating.propertyName}</p>
           <p className="text-yellow-500 mb-1">⭐ {rating.stars} / 5</p>
-          <p className="text-gray-800 mb-2">{rating.reviewText}</p>
+          <p className="text-gray-800 mb-2">Dec {rating.text}</p>
           <p className="text-gray-400 text-sm">
             {new Date(rating.date).toLocaleDateString()}
           </p>

@@ -65,13 +65,17 @@ export default function PropertyDetails() {
       propertyId: id,
       reviewerName: user.displayName || "Anonymous",
       reviewerEmail: user.email,
+      category: property.category,
+      propertyName: property.propertyName,
+      image: property.image,
+      price: property.price,
+      location: property.location,
       stars: newRating,
       text: reviewText,
       date: new Date().toISOString(),
     };
 
     fetch("http://localhost:3000/properties", {
-      // 5000 হলো backend পোর্ট
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(reviewPayload),

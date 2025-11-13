@@ -8,7 +8,6 @@ import AllProperties from "../Components/All Properties/AllProperties";
 import MyProperties from "../Components/MyProperties/MyProperties";
 import MyRatings from "../Components/MyRatings/MyRatings";
 import PrivateRoute from "../provider/PrivateRoute";
-import ForgetPassword from "../Pages/Login/forgetpassword";
 import AddProperties from "../Components/Add Properties/AddProperties";
 import PropertyDetails from "../Components/Property Details/PropertyDetails";
 import Update from "../Components/Update/Update";
@@ -21,12 +20,10 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        loader: () => fetch("/populer.json"),
         element: <Home />,
       },
       {
         path: "Home",
-        loader: () => fetch("/populer.json"),
         element: <Home />,
       },
       {
@@ -90,9 +87,5 @@ export const router = createBrowserRouter([
   {
     path: "Registation",
     element: <Registation />,
-  },
-  {
-    path: "forget-password",
-    element: <ForgetPassword />,
   },
 ]);

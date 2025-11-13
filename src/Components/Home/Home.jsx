@@ -81,7 +81,7 @@ export default function HomePage() {
           {properties.map((prop) => (
             <div
               key={prop._id}
-              className="flex flex-col rounded-xl shadow-md hover:shadow-xl transition-all bg-gradient-to-r from-fuchsia-50 to-sky-50  duration-200"
+              className="flex flex-col rounded-xl shadow-xl hover:shadow-xl hover:shadow-gradient transition-all border  duration-200"
             >
               <img
                 src={prop.image || "/placeholder.jpg"}
@@ -94,12 +94,10 @@ export default function HomePage() {
                     <h3 className="text-xl font-semibold mb-1">
                       {prop.propertyName}
                     </h3>
-                    <p className="text-gray-500 text-sm mb-2">
-                      {prop.location}
-                    </p>
+                    <p className=" text-sm mb-2">{prop.location}</p>
                   </div>
                   <div className="">
-                    <p className="italic text-gray-700 text-sm">
+                    <p className="italic text-sm">
                       Category :{prop.category || "N/A"}
                     </p>
                   </div>
@@ -111,7 +109,7 @@ export default function HomePage() {
 
                   <Link to={`/property/${prop._id}`}>View Details</Link>
                 </div>
-                <p className=" italic text-gray-700 text-sm">
+                <p className=" italic text-sm">
                   Posted by : {prop.userName || "Unknown"}
                 </p>
               </div>
@@ -145,12 +143,10 @@ export default function HomePage() {
             ].map((item) => (
               <div
                 key={item.title}
-                className="p-6 bg-gradient-to-r from-fuchsia-50 to-sky-50  rounded-2xl shadow-sm hover:shadow-md transition-all"
+                className="p-6 shadow-xl hover:shadow-xl hover:shadow-gradient transition-all border  duration-200 rounded-xl"
               >
-                <h3 className="text-black text-xl font-semibold mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-gray-600">{item.desc}</p>
+                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                <p className="text-gray-400">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -178,9 +174,9 @@ export default function HomePage() {
             ].map((t) => (
               <div
                 key={t.name}
-                className="bg-gradient-to-r from-fuchsia-50 to-sky-50  p-6 text-center shadow-md rounded-2xl"
+                className="shadow-xl hover:shadow-xl hover:shadow-gradient transition-all border  duration-200  p-6 text-center rounded-2xl"
               >
-                <p className="italic text-gray-700 mb-3">“{t.quote}”</p>
+                <p className="italic text-gray-400 mb-3">“{t.quote}”</p>
                 <h4 className="font-semibold text-rose-500">{t.name}</h4>
               </div>
             ))}
@@ -198,12 +194,12 @@ export default function HomePage() {
             {[1, 2, 3].map((b) => (
               <div
                 key={b}
-                className="p-6 border rounded-2xl hover:shadow-lg transition-all"
+                className="p-6 rounded-2xl shadow-xl hover:shadow-xl hover:shadow-gradient transition-all border  duration-200"
               >
                 <h3 className="text-xl font-semibold mb-2">
                   How to Find the Right Property #{b}
                 </h3>
-                <p className="text-gray-600 mb-3">
+                <p className="text-gray-400 mb-3">
                   Quick guide to evaluate property listings effectively.
                 </p>
                 <Link size="sm" variant="outline">

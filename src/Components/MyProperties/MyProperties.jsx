@@ -8,7 +8,7 @@ export default function MyProperties() {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // // 🔒 Simulated Auth
+  // Simulated Auth
   // const user = JSON.parse(localStorage.getItem("user"));
   // const isLoggedIn = !!user;
 
@@ -20,7 +20,7 @@ export default function MyProperties() {
       if (!user || !user.email) {
         console.log("User not logged in yet.");
         setLoading(false);
-        return; // ✅ Stop here if no user
+        return; // Stop here if no user
       }
 
       setLoading(true);
@@ -43,7 +43,7 @@ export default function MyProperties() {
     fetchMyProperties();
   }, [user]);
 
-  // 🗑️ Delete Property
+  //  Delete Property
   const handleDelete = async (id) => {
     const confirm = await Swal.fire({
       title: "Are you sure?",
@@ -82,29 +82,27 @@ export default function MyProperties() {
     );
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
-      <h2 className="text-3xl font-bold text-gray-800 text-center mb-10">
-        My Properties
-      </h2>
+    <div className="min-h-screen py-12 px-4">
+      <h2 className="text-3xl font-bold  text-center mb-10">My Properties</h2>
 
       {properties.length === 0 ? (
-        <p className="text-center text-gray-500">No properties found.</p>
+        <p className="text-center">No properties found.</p>
       ) : (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {properties.map((prop) => (
             <div
               key={prop._id}
-              className="flex flex-col rounded-xl shadow-md hover:shadow-xl transition-all bg-gradient-to-r from-fuchsia-50 to-sky-50  duration-200"
+              className="flex flex-col rounded-xl shadow-md hover:shadow-xl transition-all bg-gradient-to-r from-fuchsia-50 to-sky-50  duration-200  dark:secondary"
             >
               <img
-                src={prop.image || "/placeholder.jpg"}
+                src={prop.image}
                 alt={prop.propertyName}
                 className="h-48 w-full object-cover rounded-t-xl"
               />
               <div className="flex flex-col justify-between flex-grow p-4">
                 <div className="flex justify-between items-center">
                   <div className="">
-                    <h3 className="text-xl font-semibold mb-1">
+                    <h3 className="text-xl font-semibold mb-1 dark:text-black">
                       {prop.propertyName}
                     </h3>
                     <p className="text-gray-500 text-sm mb-2">
@@ -128,29 +126,33 @@ export default function MyProperties() {
                   Posted by : {prop.userName || "Unknown"}
                 </p>
               </div>
-              <div className="p-2 flex justify-between gap-2">
-                <Link
-                  variant="outline"
-                  size="sm"
-                  onClick={() => navigate(`/property/${prop._id}`)}
-                >
-                  View
-                </Link>
-                <Link
-                  variant="outline"
-                  size="sm"
-                  onClick={() => navigate(`/update/${prop._id}`)}
-                >
-                  Update
-                </Link>
-                <Link
-                  variant="default"
-                  size="sm"
-                  className="bg-rose-500 hover:bg-rose-600 text-white"
-                  onClick={() => handleDelete(prop._id)}
-                >
-                  Delete
-                </Link>
+              <div className="px-3">
+                <div className="p-3 flex justify-between gap-1">
+                  <Link
+                    variant="outline"
+                    size="sm"
+                    className="border py-1.5 px-3 rounded-sm"
+                    onClick={() => navigate(`/property/${prop._id}`)}
+                  >
+                    View
+                  </Link>
+                  <Link
+                    variant="outline"
+                    size="sm"
+                    className="border py-1.5 px-3 rounded-sm"
+                    onClick={() => navigate(`/update/${prop._id}`)}
+                  >
+                    Update
+                  </Link>
+                  <Link
+                    variant="default"
+                    size="sm"
+                    className="bg-rose-500 hover:bg-rose-600 py-1.5 px-3 rounded-sm text-white"
+                    onClick={() => handleDelete(prop._id)}
+                  >
+                    Delete
+                  </Link>
+                </div>
               </div>
             </div>
           ))}
