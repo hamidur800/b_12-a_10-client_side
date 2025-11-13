@@ -1,0 +1,148 @@
+/* From Uiverse.io by zjssun, renamed to avoid conflicts */
+.fancy-button {
+  position: relative;
+  padding: 10px 22px;
+  border-radius: 6px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  background-color: #7d2ae8;
+  transition: all 0.2s ease;
+}
+
+.fancy-button:active {
+  transform: scale(0.96);
+}
+
+.fancy-button:before,
+.fancy-button:after {
+  position: absolute;
+  content: "";
+  width: 150%;
+  left: 50%;
+  height: 100%;
+  transform: translateX(-50%);
+  z-index: -1000;
+  background-repeat: no-repeat;
+}
+
+.fancy-button:hover:before {
+  top: -70%;
+  background-image: radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, transparent 20%, #7d2ae8 20%, transparent 30%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, transparent 10%, #7d2ae8 15%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%);
+  background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%,
+    10% 10%, 18% 18%;
+  background-position: 50% 120%;
+  animation: greentopBubbles 0.6s ease;
+}
+
+@keyframes greentopBubbles {
+  0% {
+    background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%,
+      40% 90%, 55% 90%, 70% 90%;
+  }
+  50% {
+    background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%,
+      50% 50%, 65% 20%, 90% 30%;
+  }
+  100% {
+    background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%,
+      50% 40%, 65% 10%, 90% 20%;
+    background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+}
+
+.fancy-button:hover::after {
+  bottom: -70%;
+  background-image: radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, transparent 10%, #7d2ae8 15%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+    radial-gradient(circle, #7d2ae8 20%, transparent 20%);
+  background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 20% 20%, 18% 18%;
+  background-position: 50% 0%;
+  animation: greenbottomBubbles 0.6s ease;
+}
+
+@keyframes greenbottomBubbles {
+  0% {
+    background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%,
+      70% -10%, 70% 0%;
+  }
+  50% {
+    background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%,
+      105% 0%;
+  }
+  100% {
+    background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%,
+      110% 10%;
+    background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+}
+
+/* From Uiverse.io by andrew-demchenk0, renamed classes to avoid conflicts */
+.delete-button {
+  position: relative;
+  width: 150px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid #cc0000;
+  background-color: #e50000;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.delete-button__text {
+  transform: translateX(35px);
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.delete-button__icon {
+  position: absolute;
+  transform: translateX(109px);
+  height: 100%;
+  width: 39px;
+  background-color: #cc0000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.delete-button__icon svg {
+  width: 20px;
+}
+
+.delete-button:hover {
+  background: #cc0000;
+}
+
+.delete-button:hover .delete-button__text {
+  color: transparent;
+}
+
+.delete-button:hover .delete-button__icon {
+  width: 148px;
+  transform: translateX(0);
+}
+
+.delete-button:active .delete-button__icon {
+  background-color: #b20000;
+}
+
+.delete-button:active {
+  border: 1px solid #b20000;
+}

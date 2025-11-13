@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { Link } from "react-router";
 import { AuthContext } from "../../provider/AuthProvider";
+import "./myR.css";
 
 export default function MyProperties() {
   const { user } = useContext(AuthContext);
@@ -21,7 +22,7 @@ export default function MyProperties() {
       setLoading(true);
       try {
         const res = await fetch(
-          `http://localhost:3000/properties?email=${user.email}`
+          `https://b-12-a-10-server-side.vercel.app/properties?email=${user.email}`
         );
         const data = await res.json();
 
@@ -52,9 +53,12 @@ export default function MyProperties() {
 
     if (confirm.isConfirmed) {
       try {
-        const res = await fetch(`http://localhost:3000/properties/${id}`, {
-          method: "DELETE",
-        });
+        const res = await fetch(
+          `https://b-12-a-10-server-side.vercel.app/properties/${id}`,
+          {
+            method: "DELETE",
+          }
+        );
 
         if (res.ok) {
           setProperties((prev) => prev.filter((p) => p._id !== id));
@@ -116,7 +120,40 @@ export default function MyProperties() {
                     <span className=" text-rose-500">${prop.price}</span>
                   </p>
 
-                  <Link to={`/property/${prop._id}`}>View Details</Link>
+                  <Link
+                    to={`/property/${prop._id}`}
+                    className="button"
+                    style={{ "--clr": "#7808d0" }}
+                  >
+                    <span className="button__icon-wrapper">
+                      <svg
+                        viewBox="0 0 14 15"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="button__icon-svg"
+                        width="10"
+                      >
+                        <path
+                          d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
+                          fill="currentColor"
+                        />
+                      </svg>
+
+                      <svg
+                        viewBox="0 0 14 15"
+                        fill="none"
+                        width="10"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="button__icon-svg button__icon-svg--copy"
+                      >
+                        <path
+                          d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </span>
+                    View Details
+                  </Link>
                 </div>
                 <p className=" italic text-gray-400 text-sm">
                   Posted by : {prop.userName || "Unknown"}
@@ -125,29 +162,190 @@ export default function MyProperties() {
               <div className="px-3">
                 <div className="p-3 flex justify-between gap-1">
                   <Link
-                    variant="outline"
-                    size="sm"
-                    className="border py-1.5 px-3 rounded-sm"
-                    onClick={() => navigate(`/property/${prop._id}`)}
-                  >
-                    View
-                  </Link>
-                  <Link
-                    variant="outline"
-                    size="sm"
-                    className="border py-1.5 px-3 rounded-sm"
                     onClick={() => navigate(`/update/${prop._id}`)}
+                    className="fancy-button"
                   >
                     Update
                   </Link>
                   <Link
-                    variant="default"
-                    size="sm"
-                    className="bg-rose-500 hover:bg-rose-600 py-1.5 px-3 rounded-sm text-white"
+                    className="delete-button"
+                    type="button"
                     onClick={() => handleDelete(prop._id)}
                   >
-                    Delete
+                    <span className="delete-button__text">Delete</span>
+                    <span className="delete-button__icon">
+                      <svg
+                        className="svg"
+                        height="512"
+                        viewBox="0 0 512 512"
+                        width="512"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <title>Delete Icon</title>
+                        <path
+                          d="M112,112l20,320c.95,18.49,14.4,32,32,32H348c17.67,0,30.87-13.51,32-32l20-320"
+                          style={{
+                            fill: "none",
+                            stroke: "#fff",
+                            strokeLinecap: "round",
+                            strokeLinejoin: "round",
+                            strokeWidth: "32px",
+                          }}
+                        ></path>
+                        <line
+                          style={{
+                            stroke: "#fff",
+                            strokeLinecap: "round",
+                            strokeMiterlimit: 10,
+                            strokeWidth: "32px",
+                          }}
+                          x1="80"
+                          x2="432"
+                          y1="112"
+                          y2="112"
+                        ></line>
+                        <path
+                          d="M192,112V72h0a23.93,23.93,0,0,1,24-24h80a23.93,23.93,0,0,1,24,24h0v40"
+                          style={{
+                            fill: "none",
+                            stroke: "#fff",
+                            strokeLinecap: "round",
+                            strokeLinejoin: "round",
+                            strokeWidth: "32px",
+                          }}
+                        ></path>
+                        <line
+                          style={{
+                            fill: "none",
+                            stroke: "#fff",
+                            strokeLinecap: "round",
+                            strokeLinejoin: "round",
+                            strokeWidth: "32px",
+                          }}
+                          x1="256"
+                          x2="256"
+                          y1="176"
+                          y2="400"
+                        ></line>
+                        <line
+                          style={{
+                            fill: "none",
+                            stroke: "#fff",
+                            strokeLinecap: "round",
+                            strokeLinejoin: "round",
+                            strokeWidth: "32px",
+                          }}
+                          x1="184"
+                          x2="192"
+                          y1="176"
+                          y2="400"
+                        ></line>
+                        <line
+                          style={{
+                            fill: "none",
+                            stroke: "#fff",
+                            strokeLinecap: "round",
+                            strokeLinejoin: "round",
+                            strokeWidth: "32px",
+                          }}
+                          x1="328"
+                          x2="320"
+                          y1="176"
+                          y2="400"
+                        ></line>
+                      </svg>
+                    </span>
                   </Link>
+
+                  {/* <button
+                    
+                    className="button"
+                    type="button"
+                  >
+                    <span className="button__text">Delete</span>
+                    <span className="button__icon">
+                      <svg
+                        className="svg"
+                        height="512"
+                        viewBox="0 0 512 512"
+                        width="512"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <title></title>
+                        <path
+                          d="M112,112l20,320c.95,18.49,14.4,32,32,32H348c17.67,0,30.87-13.51,32-32l20-320"
+                          style={{
+                            fill: "none",
+                            stroke: "#fff",
+                            strokeLinecap: "round",
+                            strokeLinejoin: "round",
+                            strokeWidth: "32px",
+                          }}
+                        />
+                        <line
+                          x1="80"
+                          y1="112"
+                          x2="432"
+                          y2="112"
+                          style={{
+                            stroke: "#fff",
+                            strokeLinecap: "round",
+                            strokeMiterlimit: 10,
+                            strokeWidth: "32px",
+                          }}
+                        />
+                        <path
+                          d="M192,112V72h0a23.93,23.93,0,0,1,24-24h80a23.93,23.93,0,0,1,24,24h0v40"
+                          style={{
+                            fill: "none",
+                            stroke: "#fff",
+                            strokeLinecap: "round",
+                            strokeLinejoin: "round",
+                            strokeWidth: "32px",
+                          }}
+                        />
+                        <line
+                          x1="256"
+                          y1="176"
+                          x2="256"
+                          y2="400"
+                          style={{
+                            fill: "none",
+                            stroke: "#fff",
+                            strokeLinecap: "round",
+                            strokeLinejoin: "round",
+                            strokeWidth: "32px",
+                          }}
+                        />
+                        <line
+                          x1="184"
+                          y1="176"
+                          x2="192"
+                          y2="400"
+                          style={{
+                            fill: "none",
+                            stroke: "#fff",
+                            strokeLinecap: "round",
+                            strokeLinejoin: "round",
+                            strokeWidth: "32px",
+                          }}
+                        />
+                        <line
+                          x1="328"
+                          y1="176"
+                          x2="320"
+                          y2="400"
+                          style={{
+                            fill: "none",
+                            stroke: "#fff",
+                            strokeLinecap: "round",
+                            strokeLinejoin: "round",
+                            strokeWidth: "32px",
+                          }}
+                        />
+                      </svg>
+                    </span>
+                  </button> */}
                 </div>
               </div>
             </div>

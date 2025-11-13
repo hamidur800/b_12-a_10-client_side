@@ -22,7 +22,9 @@ export default function UpdateProperty() {
   useEffect(() => {
     const fetchProperty = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/properties/${id}`);
+        const res = await fetch(
+          `https://b-12-a-10-server-side.vercel.app/properties/${id}`
+        );
         if (!res.ok) throw new Error("Failed to fetch property");
         const data = await res.json();
 
@@ -59,13 +61,16 @@ export default function UpdateProperty() {
     setSubmitting(true);
 
     try {
-      const res = await fetch(`http://localhost:3000/properties/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `https://b-12-a-10-server-side.vercel.app/properties/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (!res.ok) throw new Error("Failed to update property");
 

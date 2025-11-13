@@ -15,7 +15,7 @@ const Footer = () => {
             >
               HOME-NEST
             </Link>
-            <p className="mt-2 text-sm">akhane kisu likta hobe</p>
+            <p className="mt-2 text-sm"></p>
           </aside>
 
           {/* Services */}

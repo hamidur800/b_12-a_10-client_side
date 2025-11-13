@@ -15,86 +15,75 @@ export default function PropertyDetails() {
   const [newRating, setNewRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
 
+  const BASE_URL = "https://b-12-a-10-server-side.vercel.app";
+
   // Fetch property details and reviews
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:3000/properties/${id}`)
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        return res.json();
+    Promise.all([
+      fetch(`${BASE_URL}/properties/${id}`).then((res) => res.json()),
+      fetch(`${BASE_URL}/ratings?propertyId=${id}`).then((res) => res.json()),
+    ])
+      .then(([propertyData, reviewData]) => {
+        setProperty(propertyData);
+        setReviews(reviewData);
       })
-      .then((data) => setProperty(data))
       .catch((err) => {
-        console.error("Error fetching property:", err);
-        setError("Failed to load property.");
-      });
-
-    fetch(`http://localhost:3000/ratings?propertyId=${id}`)
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        return res.json();
+        console.error("Error fetching data:", err);
+        setError("Failed to load property or reviews.");
       })
-      .then((data) => setReviews(data))
-      .catch((err) => console.error("Error fetching reviews:", err))
       .finally(() => setLoading(false));
   }, [id]);
 
-  // Submit new review
-  const handleSubmitReview = () => {
+  // Review Submit
+  const handleSubmitReview = async () => {
     if (!user) {
-      Swal.fire({
-        icon: "warning",
-        title: "Please log in!",
-        text: "You must be logged in to submit a review.",
-      });
+      Swal.fire("Oops!", "Please login first!", "warning");
+      navigator("/login");
       return;
     }
 
-    if (!newRating || reviewText.trim() === "") {
-      Swal.fire({
-        icon: "error",
-        title: "Missing Information",
-        text: "Please provide both a star rating and review text.",
-      });
+    if (!reviewText.trim() || newRating === 0) {
+      Swal.fire("Error!", "Please add rating and review text!", "error");
       return;
     }
 
-    const reviewPayload = {
+    const reviewData = {
+      propertyimage: property.image,
       reviewerName: user.displayName || "Anonymous",
       reviewerEmail: user.email,
-      category: property.category,
-      propertyName: property.propertyName,
-      image: property.image,
-      price: property.price,
-      location: property.location,
-      stars: newRating,
+      propertyId: id,
       reviewText: reviewText,
+      stars: newRating,
       date: new Date().toISOString(),
     };
 
-    fetch("http://localhost:3000/ratings", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(reviewPayload),
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to post review");
-        return res.json();
-      })
-      .then((data) => {
-        setReviews([data, ...reviews]);
+    try {
+      const res = await fetch(
+        "https://b-12-a-10-server-side.vercel.app/ratings",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(reviewData),
+        }
+      );
+
+      const data = await res.json();
+
+      if (res.ok) {
+        Swal.fire("Success!", "Review added successfully!", "success");
+        setReviews([...reviews, data]);
         setNewRating(0);
         setReviewText("");
-        Swal.fire({
-          icon: "success",
-          title: "Review Submitted!",
-          text: "Your review has been posted successfully.",
-          showConfirmButton: false,
-          timer: 2000,
-        });
-        navigator("/MyRatings");
-      })
-      .catch((err) => console.error("Error posting review:", err));
+        navigator(`/MyRatings`);
+      } else {
+        console.error("Server Response:", data);
+        Swal.fire("Error!", data.error || "Failed to add review.", "error");
+      }
+    } catch (error) {
+      console.error("Error posting review:", error);
+      Swal.fire("Error!", "Server error occurred!", "error");
+    }
   };
 
   if (loading) return <p className="text-center mt-10">Loading property...</p>;
@@ -130,41 +119,16 @@ export default function PropertyDetails() {
           <div className="flex items-center flex-row">
             <div className="inline-flex items-center gap-2">
               <div className="flex items-center gap-1">
-                <CiStar
-                  onClick={() => setNewRating(1)}
-                  size={25}
-                  className={
-                    newRating >= 1 ? "text-yellow-500" : "text-gray-300"
-                  }
-                />
-                <CiStar
-                  onClick={() => setNewRating(2)}
-                  size={25}
-                  className={
-                    newRating >= 2 ? "text-yellow-500" : "text-gray-300"
-                  }
-                />
-                <CiStar
-                  onClick={() => setNewRating(3)}
-                  size={25}
-                  className={
-                    newRating >= 3 ? "text-yellow-500" : "text-gray-300"
-                  }
-                />
-                <CiStar
-                  onClick={() => setNewRating(4)}
-                  size={25}
-                  className={
-                    newRating >= 4 ? "text-yellow-500" : "text-gray-300"
-                  }
-                />
-                <CiStar
-                  onClick={() => setNewRating(5)}
-                  size={25}
-                  className={
-                    newRating >= 5 ? "text-yellow-500" : "text-gray-300"
-                  }
-                />
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <CiStar
+                    key={star}
+                    onClick={() => setNewRating(star)}
+                    size={25}
+                    className={
+                      newRating >= star ? "text-yellow-500" : "text-gray-300"
+                    }
+                  />
+                ))}
               </div>
               <span>{newRating} Stars</span>
             </div>
