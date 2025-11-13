@@ -1,19 +1,17 @@
 import { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { AuthContext } from "../../provider/AuthProvider";
-import { Rating } from "react-simple-star-rating";
+import { CiStar } from "react-icons/ci";
 import Swal from "sweetalert2";
 
 export default function PropertyDetails() {
   const { id } = useParams();
   const { user } = useContext(AuthContext);
-
+  const navigator = useNavigate();
   const [property, setProperty] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // For new review
   const [newRating, setNewRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
 
@@ -62,7 +60,6 @@ export default function PropertyDetails() {
     }
 
     const reviewPayload = {
-      propertyId: id,
       reviewerName: user.displayName || "Anonymous",
       reviewerEmail: user.email,
       category: property.category,
@@ -71,11 +68,11 @@ export default function PropertyDetails() {
       price: property.price,
       location: property.location,
       stars: newRating,
-      text: reviewText,
+      reviewText: reviewText,
       date: new Date().toISOString(),
     };
 
-    fetch("http://localhost:3000/properties", {
+    fetch("http://localhost:3000/ratings", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(reviewPayload),
@@ -85,7 +82,7 @@ export default function PropertyDetails() {
         return res.json();
       })
       .then((data) => {
-        setReviews([data, ...reviews]); // add new review on top
+        setReviews([data, ...reviews]);
         setNewRating(0);
         setReviewText("");
         Swal.fire({
@@ -95,6 +92,7 @@ export default function PropertyDetails() {
           showConfirmButton: false,
           timer: 2000,
         });
+        navigator("/MyRatings");
       })
       .catch((err) => console.error("Error posting review:", err));
   };
@@ -115,11 +113,11 @@ export default function PropertyDetails() {
         />
         <div className="flex-1">
           <h1 className="text-2xl font-bold mb-2">{property.propertyName}</h1>
-          <p className="text-gray-600 mb-1">Category: {property.category}</p>
-          <p className="text-gray-600 mb-1">Price: ${property.price}</p>
-          <p className="text-gray-600 mb-1">Location: {property.location}</p>
-          <p className="text-gray-600 mb-1">Posted by: {property.userName}</p>
-          <p className="text-gray-500 text-sm">
+          <p className="text-gray-400 mb-1">Category: {property.category}</p>
+          <p className="text-gray-400 mb-1">Price: ${property.price}</p>
+          <p className="text-gray-400 mb-1">Location: {property.location}</p>
+          <p className="text-gray-400 mb-1">Posted by: {property.userName}</p>
+          <p className="text-gray-400 text-sm">
             Posted on: {new Date(property.createdAt).toLocaleDateString()}
           </p>
         </div>
@@ -130,12 +128,46 @@ export default function PropertyDetails() {
         <div className="mb-8 border p-4 rounded-lg">
           <h2 className="text-xl font-semibold mb-2">Add Your Review</h2>
           <div className="flex items-center flex-row">
-            <Rating
-              onClick={setNewRating}
-              ratingValue={newRating}
-              size={25}
-              allowHalfIcon={false}
-            />
+            <div className="inline-flex items-center gap-2">
+              <div className="flex items-center gap-1">
+                <CiStar
+                  onClick={() => setNewRating(1)}
+                  size={25}
+                  className={
+                    newRating >= 1 ? "text-yellow-500" : "text-gray-300"
+                  }
+                />
+                <CiStar
+                  onClick={() => setNewRating(2)}
+                  size={25}
+                  className={
+                    newRating >= 2 ? "text-yellow-500" : "text-gray-300"
+                  }
+                />
+                <CiStar
+                  onClick={() => setNewRating(3)}
+                  size={25}
+                  className={
+                    newRating >= 3 ? "text-yellow-500" : "text-gray-300"
+                  }
+                />
+                <CiStar
+                  onClick={() => setNewRating(4)}
+                  size={25}
+                  className={
+                    newRating >= 4 ? "text-yellow-500" : "text-gray-300"
+                  }
+                />
+                <CiStar
+                  onClick={() => setNewRating(5)}
+                  size={25}
+                  className={
+                    newRating >= 5 ? "text-yellow-500" : "text-gray-300"
+                  }
+                />
+              </div>
+              <span>{newRating} Stars</span>
+            </div>
           </div>
           <textarea
             className="w-full border rounded p-2 mt-2 mb-2"
@@ -151,8 +183,6 @@ export default function PropertyDetails() {
           </button>
         </div>
       )}
-
-      {/* Reviews List */}
     </div>
   );
 }

@@ -83,15 +83,15 @@ function Login() {
         <title>Login | HOME-NEST</title>
       </Helmet>
       <div className="min-h-screen flex items-center justify-center px-4">
-        <div className="bg-white shadow-2xl rounded-2xl w-full max-w-md lg:max-w-xl flex flex-col lg:flex-row overflow-hidden">
+        <div className="border shadow-2xl rounded-2xl w-full max-w-md lg:max-w-xl flex flex-col lg:flex-row overflow-hidden">
           <div className="flex-1 p-8 sm:p-10">
-            <h2 className="text-3xl font-bold text-center text-gray-700 mb-6">
+            <h2 className="text-3xl font-bold text-center  mb-6">
               Log In HOME-NEST !
             </h2>
 
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
-                <label className="block text-gray-600 mb-1">Email</label>
+                <label className="block text-gray-400 mb-1">Email</label>
                 <input
                   type="email"
                   placeholder="Enter your email"
@@ -104,7 +104,7 @@ function Login() {
               </div>
 
               <div className="relative">
-                <label className="block text-gray-600 mb-1">Password</label>
+                <label className="block text-gray-400 mb-1">Password</label>
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
@@ -114,7 +114,7 @@ function Login() {
                   required
                 />
                 <div
-                  className="absolute  right-3 top-12 -translate-y-1/2 cursor-pointer text-gray-600"
+                  className="absolute  right-3 top-12 -translate-y-1/2 cursor-pointer text-gray-400"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
@@ -127,7 +127,8 @@ function Login() {
 
               <div className="flex justify-end">
                 <div>
-                  <Link to="/forget-password" state={{ email }}>
+                  {/* to="/forget-password" */}
+                  <Link state={{ email }}>
                     <button className="link link-hover text-blue-500">
                       Forgot password?
                     </button>

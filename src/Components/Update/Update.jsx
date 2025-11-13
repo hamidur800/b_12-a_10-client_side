@@ -7,7 +7,6 @@ export default function UpdateProperty() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
@@ -99,41 +98,41 @@ export default function UpdateProperty() {
     );
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
+    <div className="min-h-screen py-12 px-4">
       <h2 className="text-3xl font-bold text-center mb-10">Update Property</h2>
 
       <form
         onSubmit={handleSubmit}
-        className="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-md"
+        className="max-w-3xl mx-auto p-8 rounded-2xl shadow-xl border"
       >
         {/* User Info */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-1">
+          <label className="block text-gray-400 font-semibold mb-1">
             User Name
           </label>
           <input
             type="text"
             value={user?.displayName || ""}
             readOnly
-            className="w-full border rounded px-3 py-2 bg-gray-100 cursor-not-allowed"
+            className="w-full border rounded px-3 py-2 cursor-not-allowed"
           />
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-1">
+          <label className="block text-gray-400 font-semibold mb-1">
             User Email
           </label>
           <input
             type="email"
             value={user?.email || ""}
             readOnly
-            className="w-full border rounded px-3 py-2 bg-gray-100 cursor-not-allowed"
+            className="w-full border rounded px-3 py-2 cursor-not-allowed"
           />
         </div>
 
         {/* Property Fields */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-1">
+          <label className="block text-gray-400 font-semibold mb-1">
             Property Name
           </label>
           <input
@@ -147,7 +146,7 @@ export default function UpdateProperty() {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-1">
+          <label className="block text-gray-400 font-semibold mb-1">
             Price
           </label>
           <input
@@ -161,7 +160,7 @@ export default function UpdateProperty() {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-1">
+          <label className="block text-gray-400 font-semibold mb-1">
             Location
           </label>
           <input
@@ -175,7 +174,7 @@ export default function UpdateProperty() {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-1">
+          <label className="block text-gray-400 font-semibold mb-1">
             Category
           </label>
           <select
@@ -185,15 +184,23 @@ export default function UpdateProperty() {
             required
             className="w-full border rounded px-3 py-2"
           >
-            <option value="">Select Category</option>
-            <option value="Flat">Flat</option>
-            <option value="House">House</option>
-            <option value="Office">Office</option>
+            <option className="text-gray-400" value="">
+              Select Category
+            </option>
+            <option className="text-gray-400" value="Flat">
+              Flat
+            </option>
+            <option className="text-gray-400" value="House">
+              House
+            </option>
+            <option className="text-gray-400" value="Office">
+              Office
+            </option>
           </select>
         </div>
 
         <div className="mb-6">
-          <label className="block text-gray-700 font-semibold mb-1">
+          <label className="block text-gray-400 font-semibold mb-1">
             Description
           </label>
           <textarea

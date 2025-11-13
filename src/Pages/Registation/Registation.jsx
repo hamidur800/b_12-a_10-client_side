@@ -53,7 +53,7 @@ function Registation() {
           Swal.fire({
             icon: "success",
             title: "Registration Successful!",
-            text: "Welcome to Toy-Topia 🎉",
+            text: "Welcome to home-nest ",
             showConfirmButton: false,
             timer: 1800,
           });
@@ -70,7 +70,7 @@ function Registation() {
         Swal.fire({
           icon: "success",
           title: "Login Successful!",
-          text: "Welcome back 🎉",
+          text: "Welcome back to home-nest ",
           showConfirmButton: false,
           timer: 1800,
         });
@@ -88,16 +88,16 @@ function Registation() {
       </Helmet>{" "}
       <div className="min-h-screen flex items-center justify-center px-4">
         {" "}
-        <div className="bg-white shadow-2xl rounded-2xl w-full max-w-md lg:max-w-xl flex flex-col lg:flex-row overflow-hidden">
+        <div className="border shadow-2xl rounded-2xl w-full max-w-md lg:max-w-xl flex flex-col lg:flex-row overflow-hidden">
           {" "}
           <div className="flex-1 p-8 sm:p-10">
             {" "}
-            <h2 className="text-3xl font-bold text-center text-gray-700 mb-6">
+            <h2 className="text-3xl font-bold text-center mb-6">
               Register to HOME-NEST !{" "}
             </h2>
             <form onSubmit={handleRegister} className="space-y-4">
               <div>
-                <label className="block text-gray-600 mb-1">Name</label>
+                <label className="block text-gray-400 mb-1">Name</label>
                 <input
                   name="name"
                   type="text"
@@ -108,7 +108,7 @@ function Registation() {
               </div>
 
               <div>
-                <label className="block text-gray-600 mb-1">Email</label>
+                <label className="block text-gray-400 mb-1">Email</label>
                 <input
                   name="email"
                   type="email"
@@ -119,7 +119,7 @@ function Registation() {
               </div>
 
               <div>
-                <label className="block text-gray-600 mb-1">photoURL</label>
+                <label className="block text-gray-400 mb-1">photoURL</label>
                 <input
                   name="photoURL"
                   type="text"
@@ -129,7 +129,7 @@ function Registation() {
               </div>
 
               <div className="relative">
-                <label className="block text-gray-600 mb-1">Password</label>
+                <label className="block text-gray-400 mb-1">Password</label>
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
@@ -140,7 +140,7 @@ function Registation() {
                   required
                 />
                 <div
-                  className="absolute right-3 top-12 -translate-y-1/2 cursor-pointer text-gray-600"
+                  className="absolute right-3 top-12 -translate-y-1/2 cursor-pointer text-gray-400"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
