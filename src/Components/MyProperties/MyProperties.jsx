@@ -92,7 +92,7 @@ export default function MyProperties() {
           {properties.map((prop) => (
             <div
               key={prop._id}
-              className="flex flex-col rounded-xl shadow-md hover:shadow-xl transition-all bg-gradient-to-r from-fuchsia-50 to-sky-50  duration-200  dark:secondary"
+              className="flex flex-col shadow-xl hover:shadow-xl hover:shadow-gradient transition-all border  duration-200 rounded-xl"
             >
               <img
                 src={prop.image}
@@ -102,27 +102,28 @@ export default function MyProperties() {
               <div className="flex flex-col justify-between flex-grow p-4">
                 <div className="flex justify-between items-center">
                   <div className="">
-                    <h3 className="text-xl font-semibold mb-1 dark:text-black">
+                    <h3 className="text-xl font-semibold mb-1">
                       {prop.propertyName}
                     </h3>
-                    <p className="text-gray-500 text-sm mb-2">
+                    <p className="text-gray-400 text-sm mb-2">
                       {prop.location}
                     </p>
                   </div>
                   <div className="">
-                    <p className="italic text-gray-700 text-sm">
+                    <p className="italic text-gray-400 text-sm">
                       Category :{prop.category || "N/A"}
                     </p>
                   </div>
                 </div>
                 <div className="flex justify-between items-center mt-auto">
-                  <p className="text-lg font-bold text-rose-500">
-                    ${prop.price}
+                  <p className="text-lg font-bold">
+                    price :{" "}
+                    <span className=" text-rose-500">${prop.price}</span>
                   </p>
 
                   <Link to={`/property/${prop._id}`}>View Details</Link>
                 </div>
-                <p className=" italic text-gray-700 text-sm">
+                <p className=" italic text-gray-400 text-sm">
                   Posted by : {prop.userName || "Unknown"}
                 </p>
               </div>
