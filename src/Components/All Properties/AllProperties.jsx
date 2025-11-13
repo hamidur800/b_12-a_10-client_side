@@ -32,10 +32,10 @@ export default function AllProperties() {
   }, [search, sort]);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
+    <div className="min-h-screen py-12 px-4">
       {/* Header Controls */}
       <div className="max-w-7xl mx-auto mb-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-        <h2 className="text-3xl font-bold text-gray-800">All Properties</h2>
+        <h2 className="text-3xl font-bold">All Properties</h2>
 
         <div className="flex flex-wrap items-center gap-3">
           {/* Search */}
@@ -44,20 +44,30 @@ export default function AllProperties() {
             placeholder="Search by name..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="px-4 py-2 border rounded-xl w-56 focus:ring-2 focus:ring-rose-400 outline-none"
+            className="px-4 py-2 border rounded-lg w-56 focus:ring-2 focus:ring-gray-400 outline-none"
           />
 
           {/* Sort Dropdown */}
           <select
             onChange={(e) => setSort(e.target.value)}
             value={sort}
-            className="px-4 py-2 border rounded-xl focus:ring-2 focus:ring-rose-400 outline-none"
+            className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gray-400 outline-none"
           >
-            <option value="">Sort by</option>
-            <option value="price_asc">Price Up</option>
-            <option value="price_desc">Price Down</option>
-            <option value="date_asc">Date Up</option>
-            <option value="date_desc">Date Down</option>
+            <option className="text-gray-400" value="">
+              Sort by
+            </option>
+            <option className="text-gray-400" value="price_asc">
+              Price Down
+            </option>
+            <option className="text-gray-400" value="price_desc">
+              Price Up
+            </option>
+            <option className="text-gray-400" value="date_asc">
+              Date Down
+            </option>
+            <option className="text-gray-400" value="date_desc">
+              Date Up
+            </option>
           </select>
         </div>
       </div>
@@ -70,14 +80,14 @@ export default function AllProperties() {
       ) : (
         <div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {properties.length === 0 ? (
-            <p className="col-span-full text-center text-gray-500">
+            <p className="col-span-full text-center text-gray-400">
               No properties found.
             </p>
           ) : (
             properties.map((prop) => (
               <div
                 key={prop._id}
-                className="flex flex-col shadow-md hover:shadow-xl rounded-xl  transition-all duration-200"
+                className="flex flex-col hover:shadow-xl hover:shadow-gradient transition-all border  duration-200 rounded-xl "
               >
                 <img
                   src={prop.image || "/placeholder.jpg"}
