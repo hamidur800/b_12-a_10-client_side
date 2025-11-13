@@ -42,9 +42,9 @@ const AddProperties = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-indigo-50 to-pink-50 py-12">
-      <div className="w-11/12 md:w-3/5 mx-auto bg-white rounded-3xl shadow-2xl p-8">
-        <h2 className="text-3xl font-bold text-center text-indigo-600 mb-8">
+    <div className="min-h-screen py-12">
+      <div className="w-11/12 md:w-3/5 mx-auto  rounded-3xl shadow-2xl p-8 border">
+        <h2 className="text-3xl font-bold text-center mb-8">
           Add New Property
         </h2>
 
@@ -60,7 +60,7 @@ const AddProperties = () => {
             <input
               name="category"
               type="text"
-              placeholder="Category (Rent, Sale, etc.)"
+              placeholder="Category (Flat, House, Office, etc.)"
               className="input input-bordered w-full"
               required
             />
@@ -102,12 +102,12 @@ const AddProperties = () => {
             <input
               value={user?.displayName || ""}
               readOnly
-              className="input input-bordered w-full"
+              className="input input-bordered w-full cursor-not-allowed"
             />
             <input
               value={user?.email || ""}
               readOnly
-              className="input input-bordered w-full"
+              className="input input-bordered not-focus: w-full cursor-not-allowed"
             />
           </div>
 
