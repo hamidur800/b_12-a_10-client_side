@@ -5,7 +5,7 @@
 
 ## Features
 - 1.Clean, responsive UI that works smoothly on all devices.
-- 2.Authentication system with user profiles and OAuth (Google/GitHub).
+- 2.Authentication system with user profiles and OAuth (Google).
 - 3.Powerful search and filter options to quickly find important content.
 - 4.Private Route (Protected Route) to allow access only after login.
 - 5.Full CRUD operations (GET, POST, PUT, DELETE) for managing data.
