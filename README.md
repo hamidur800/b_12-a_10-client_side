@@ -4,11 +4,11 @@
 > MyWebsite is a modern, responsive web application that helps users manage tasks, collaborate with teammates, and track progress — fast and simply.
 
 ## Features
-##1- Clean, responsive UI with All Device design and smooth interactions.
-##2- Authentication & user profiles with OAuth (Google / GitHub).
-##3- Powerful search and filters for quick access to what matters.
-##4- PrivetRouter Login To Access .
-##5- CURD get,put,post, delete oparation 
+- 1.Clean, responsive UI that works smoothly on all devices.
+- 2.Authentication system with user profiles and OAuth (Google/GitHub).
+- 3.Powerful search and filter options to quickly find important content.
+- 4.Private Route (Protected Route) to allow access only after login.
+- 5.Full CRUD operations (GET, POST, PUT, DELETE) for managing data.
 
 
 
