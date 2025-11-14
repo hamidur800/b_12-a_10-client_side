@@ -1,16 +1,18 @@
-# React + Vite
+# MyWebsite — HOME NEST
+[Live Site](https://b-12-a10-client.netlify.app)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> MyWebsite is a modern, responsive web application that helps users manage tasks, collaborate with teammates, and track progress — fast and simply.
 
-Currently, two official plugins are available:
+## Features
+1- Clean, responsive UI with All Device design and smooth interactions.
+2- Authentication & user profiles with OAuth (Google / GitHub).
+3- Powerful search and filters for quick access to what matters.
+4- PrivetRouter Login To Access .
+5- CURD get,put,post, delete oparation 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Getting Started (client)
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/hamidur800/b_12-a_10-client_side.git
