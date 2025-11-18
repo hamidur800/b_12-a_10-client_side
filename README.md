@@ -16,3 +16,6 @@
 1. Clone the repo:
    ```bash
    git clone https://github.com/hamidur800/b_12-a_10-client_side.git
+2. Dependencie All Install:
+   ```bash
+   npm i
