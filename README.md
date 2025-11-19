@@ -1,6 +1,6 @@
 # MyWebsite — HOME NEST
 
-![Project Screenshot](path/to/screenshot.png)
+![Project Screenshot](https://github.com/hamidur800/b_12-a_10-client_side/blob/main/screenshot.png)
 
 ## Project Overview
 MyWebsite is a modern, responsive web application that helps users manage tasks, collaborate with teammates, and track progress — fast and simply.
