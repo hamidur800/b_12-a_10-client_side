@@ -22,7 +22,32 @@ MyWebsite is a modern, responsive web application that helps users manage tasks,
 
 ## Dependencies
 ```Bash
-hewfuhfguegfuqhjoiugfywgdau
+"dependencies": {
+    "@tailwindcss/vite": "^4.1.17",
+    "axios": "^1.13.2",
+    "firebase": "^12.5.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-helmet": "^6.1.0",
+    "react-icons": "^5.5.0",
+    "react-router": "^7.9.5",
+    "react-simple-star-rating": "^5.1.7",
+    "sweetalert2": "^11.26.3",
+    "swiper": "^12.0.3",
+    "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "@types/react": "^19.1.16",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.4",
+    "daisyui": "^5.4.7",
+    "eslint": "^9.36.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.22",
+    "globals": "^16.4.0",
+    "vite": "^7.1.7"
+  }
 ```
 
 ## Installation and Running Locally
@@ -42,12 +67,12 @@ hewfuhfguegfuqhjoiugfywgdau
    ```bash
    npm run dev
    ```
-5. Open [http://localhost:3000](http://localhost:5173) in your browser
+5. Open [http://localhost:5173](http://localhost:5173) in your browser
 
 ## Live Link
 [https://b-12-a10-client.netlify.app/](https://b-12-a10-client.netlify.app/)
 
 ## Additional Links
 - [Figma Design](https://www.figma.com/file/...)
-- [API Documentation](https://api-docs-link.com)
+
 
