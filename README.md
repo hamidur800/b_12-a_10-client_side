@@ -42,7 +42,7 @@ hewfuhfguegfuqhjoiugfywgdau
    ```bash
    npm run dev
    ```
-5. Open [http://localhost:3000](http://localhost:3000) in your browser
+5. Open [http://localhost:3000](http://localhost:5173) in your browser
 
 ## Live Link
 [https://b-12-a10-client.netlify.app/](https://b-12-a10-client.netlify.app/)
