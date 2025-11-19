@@ -1,16 +1,78 @@
-# React + Vite
+# MyWebsite — HOME NEST
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Project Screenshot](path/to/screenshot.png)
 
-Currently, two official plugins are available:
+## Project Overview
+MyWebsite is a modern, responsive web application that helps users manage tasks, collaborate with teammates, and track progress — fast and simply.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+- React.js
+- Tailwind CSS
+- Firebase (Authentication)
+- Database (mongodb atlas)
+- React Router (Private/Protected Routes)
+- OAuth (Google Login)
 
-## React Compiler
+## Features
+1. Clean, responsive UI that works smoothly on all devices.
+2. Authentication system with user profiles and OAuth (Google).
+3. Powerful search and filter options to quickly find important content.
+4. Private Route (Protected Route) to allow access only after login.
+5. Full CRUD operations (GET, POST, PUT, DELETE) for managing data.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Dependencies
+```Bash
+"dependencies": {
+    "@tailwindcss/vite": "^4.1.17",
+    "axios": "^1.13.2",
+    "firebase": "^12.5.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-helmet": "^6.1.0",
+    "react-icons": "^5.5.0",
+    "react-router": "^7.9.5",
+    "react-simple-star-rating": "^5.1.7",
+    "sweetalert2": "^11.26.3",
+    "swiper": "^12.0.3",
+    "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "@types/react": "^19.1.16",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.4",
+    "daisyui": "^5.4.7",
+    "eslint": "^9.36.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.22",
+    "globals": "^16.4.0",
+    "vite": "^7.1.7"
+  }
+```
 
-## Expanding the ESLint configuration
+## Installation and Running Locally
+1. Clone the repository  
+   ```bash
+   git clone https://github.com/hamidur800/b_12-a_10-client_side.git
+   ```
+2. Navigate to the project directory  
+   ```bash
+   cd b_12-a_10-client_side
+   ```
+3. Install dependencies  
+   ```bash
+   npm install
+   ```
+4. Start the development server  
+   ```bash
+   npm run dev
+   ```
+5. Open [http://localhost:5173](http://localhost:5173) in your browser
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Live Link
+[https://b-12-a10-client.netlify.app/](https://b-12-a10-client.netlify.app/)
+
+## Additional Links
+- [Figma Design](https://www.figma.com/file/...)
+
+
