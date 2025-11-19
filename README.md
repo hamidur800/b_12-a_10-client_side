@@ -1,6 +1,9 @@
 # MyWebsite — HOME NEST
 
-![Project Screenshot](https://github.com/hamidur800/b_12-a_10-client_side/blob/main/screenshot.png)
+## light-Mode
+![Project Screenshot](https://github.com/hamidur800/b_12-a_10-client_side/blob/main/light-mode.png)
+## Dark-Mode
+![Project Screenshot](https://github.com/hamidur800/b_12-a_10-client_side/blob/main/dark-mode.png)
 
 ## Project Overview
 MyWebsite is a modern, responsive web application that helps users manage tasks, collaborate with teammates, and track progress — fast and simply.
@@ -72,7 +75,5 @@ MyWebsite is a modern, responsive web application that helps users manage tasks,
 ## Live Link
 [https://b-12-a10-client.netlify.app/](https://b-12-a10-client.netlify.app/)
 
-## Additional Links
-- [Figma Design](https://www.figma.com/file/...)
 
 
