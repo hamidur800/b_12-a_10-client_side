@@ -7,6 +7,9 @@ const AddProperties = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  if (!user) {
+    return navigate("/login");
+  }
   const handleAddProperty = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -23,7 +26,7 @@ const AddProperties = () => {
       createdAt: new Date(),
     };
 
-    fetch("http://localhost:3000/properties", {
+    fetch("https://b-12-a-10-server-side.vercel.app/properties", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(propertyData),

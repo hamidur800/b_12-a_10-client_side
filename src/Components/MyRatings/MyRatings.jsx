@@ -1,16 +1,22 @@
 import { useEffect, useState, useContext, use } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
+import { useNavigate } from "react-router";
 
 export default function MyRatings() {
   const { user } = useContext(AuthContext);
   const [ratings, setRatings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) return;
+    if (!user) {
+      return navigate("/login");
+    }
 
-    fetch(`http://localhost:3000/properties?email=${user.email}`)
+    fetch(
+      `https://b-12-a-10-server-side.vercel.app/properties?email=${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setRatings(data);
@@ -19,6 +25,13 @@ export default function MyRatings() {
       .finally(() => setLoading(false));
   }, [user]);
 
+  if (!user) {
+    return (
+      <p className="text-center mt-10 text-red-500">
+        Please log in to see your ratings.
+      </p>
+    );
+  }
   if (!user) {
     return (
       <p className="text-center mt-10 text-red-500">

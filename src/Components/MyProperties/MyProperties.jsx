@@ -13,6 +13,10 @@ export default function MyProperties() {
 
   useEffect(() => {
     const fetchMyProperties = async () => {
+      if (!user) {
+        return navigate("/login");
+      }
+
       if (!user || !user.email) {
         console.log("User not logged in yet.");
         setLoading(false);
