@@ -106,6 +106,7 @@ export default function HomePage() {
                   <p className="text-lg font-bold text-rose-500">
                     ${prop.price}
                   </p>
+                  <Link to={`/property/${prop._id}`}> aii ta </Link>
 
                   <Link
                     to={`/property/${prop._id}`}

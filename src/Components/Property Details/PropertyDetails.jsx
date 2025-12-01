@@ -22,7 +22,7 @@ export default function PropertyDetails() {
     setLoading(true);
     Promise.all([
       fetch(`${BASE_URL}/properties/${id}`).then((res) => res.json()),
-      fetch(`${BASE_URL}/ratings?propertyId=${id}`).then((res) => res.json()),
+      // fetch(`${BASE_URL}/ratings?propertyId=${id}`).then((res) => res.json()),
     ])
       .then(([propertyData, reviewData]) => {
         setProperty(propertyData);
